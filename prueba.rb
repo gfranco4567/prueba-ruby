@@ -9,6 +9,12 @@ array = read_alum('alumnos.csv')
 
 #[["David", "9", "2", "5", "1", "1"], ["Macarena", "10", "2", "A", "8", "1"], ["Ignacio", "10", "10", "9", "9", "A"], ["Rocio", "10", "10", "10", "10", "10"]]
 
+# Definir Nota de Aprobación:
+def aprobado?(promedio, nota_de_aprobación = 5.0)
+  promedio >= nota_de_aprobación
+end
+
+
 def menu
   puts '1) Imprimir en pantalla el nombre de cada alumno y el promedio de sus notas'
   puts '2) Imprimir en pantalla el nombre de cada alumno y la cantidad de inasistencias'
@@ -28,7 +34,7 @@ while opcion != 4
     array.each do |usuario|
       nombre = usuario[0]
       notas_alum = usuario[1..-1].map { |num| num.to_f }
-      promedio = notas_alum.sum / 5
+      promedio = notas_alum.sum / notas_alum.count
       puts "\nNombre: #{nombre}, Promedio de notas: #{promedio}"
     end
 
@@ -57,20 +63,15 @@ while opcion != 4
     array.each do |usuario|
       nombre = usuario[0]
       notas_alum = usuario[1..-1].map { |num| num.to_f }
-      promedio = notas_alum.sum / 5
+      promedio = notas_alum.sum / notas_alum.count
 
-    def aprobado?(promedio, nota_de_aprobación = 5.0)
-      promedio >= nota_de_aprobación
+      if aprobado?(promedio) == true
+        puts "\n#{nombre} está aprobado, ya que su promedio fue nota #{promedio}."
+      else
+      end
     end
 
-if aprobado?(promedio) == true
-  puts "\n#{nombre} está aprobado, ya que su promedio fue nota #{promedio}."
-else
-  puts "\n#{nombre} está reprobado, ya que su promedio fue nota #{promedio}."
-end
-end
-
-# Cuando ingresan otro número_ OK
+    # Cuando ingresan otro número_ OK
   else
     puts "Ingrese una opción válida"
   end
